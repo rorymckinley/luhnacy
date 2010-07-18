@@ -17,4 +17,10 @@ describe "Luhnacy" do
     candidate.should match /^\d{#{string_size}}$/
     Luhnacy.valid?(candidate).should be_true
   end
+
+  it "should return a string of digits that does not satisfy Luhn" do
+    string_size = 5
+    candidate = Luhnacy.generate(string_size, :invalid => true)
+    Luhnacy.valid?(candidate).should be_false
+  end
 end
