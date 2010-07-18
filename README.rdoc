@@ -3,9 +3,9 @@
 A tiny (hopefully) gem that will automate some of the painful tasks of generating / validating strings of numbers based on the Luhn algorithm (e.g. credit card numbers, ID numbers).
 
 Sources used so far:
-http://blog.flame.org/2008/3/24/checking-credit-card-numbers-in-ruby
-http://www.missiondata.com/blog/web-development/25/credit-card-type-and-luhn-check-in-ruby/
-http://en.wikipedia.org/wiki/Luhn
+* http://blog.flame.org/2008/3/24/checking-credit-card-numbers-in-ruby
+* http://www.missiondata.com/blog/web-development/25/credit-card-type-and-luhn-check-in-ruby/
+* http://en.wikipedia.org/wiki/Luhn
 
 == Note on Patches/Pull Requests
  
