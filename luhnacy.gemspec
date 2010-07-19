@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rory McKinley"]
   s.date = %q{2010-07-19}
-  s.description = %q{This gem can be used to validate a string for compliance with the Luhn algorithm or alternatively generate strings that comply or do not comply with the Lun algorithm for use in tests or specs}
+  s.description = %q{TODO: longer description of your gem}
   s.email = %q{rorymckinley@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/luhnacy.rb",
+     "luhnacy.gemspec",
      "spec/luhnacy_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
@@ -32,7 +33,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{A gem to help validate and generate Luhn-compliant strings}
+  s.summary = %q{TODO: one-line summary of your gem}
   s.test_files = [
     "spec/luhnacy_spec.rb",
      "spec/spec_helper.rb"
