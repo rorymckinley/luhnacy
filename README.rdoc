@@ -4,6 +4,10 @@ A tiny (hopefully) gem that will automate some of the painful tasks of generatin
 
 == Usage
 
+To require:
+
+  require 'luhnacy'
+
 To validate:
 
   Luhnacy.valid?('49927398716')
