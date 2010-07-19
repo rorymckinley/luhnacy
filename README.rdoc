@@ -2,10 +2,19 @@
 
 A tiny (hopefully) gem that will automate some of the painful tasks of generating / validating strings of numbers based on the Luhn algorithm (e.g. credit card numbers, ID numbers).
 
-Sources used so far:
-* http://blog.flame.org/2008/3/24/checking-credit-card-numbers-in-ruby
-* http://www.missiondata.com/blog/web-development/25/credit-card-type-and-luhn-check-in-ruby/
-* http://en.wikipedia.org/wiki/Luhn
+== Usage
+
+To validate:
+
+  Luhnacy.valid?('49927398716')
+
+To generate a string of 10 digits that satisfies the Luhn algorithm:
+
+  valid_string = Luhnacy.generate(10)
+
+To generate a string of 10 digits that does not satisfy Luhn algorithm:
+
+  invalid_string = Luhnacy.generate(10, :invalid => true)
 
 == Note on Patches/Pull Requests
  
@@ -16,6 +25,12 @@ Sources used so far:
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
+
+== Sources
+
+* http://blog.flame.org/2008/3/24/checking-credit-card-numbers-in-ruby
+* http://www.missiondata.com/blog/web-development/25/credit-card-type-and-luhn-check-in-ruby/
+* http://en.wikipedia.org/wiki/Luhn
 
 == Copyright
 
