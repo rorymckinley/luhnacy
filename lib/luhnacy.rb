@@ -4,7 +4,7 @@ class Luhnacy
   end
 
   def self.generate(string_size, options={})
-    output = ''
+    output = options[:prefix] || ''
     (string_size-1).times do |n|
       output += rand(10).to_s
     end
