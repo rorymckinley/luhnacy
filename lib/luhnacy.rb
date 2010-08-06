@@ -4,8 +4,10 @@ class Luhnacy
   end
 
   def self.generate(string_size, options={})
+    raise ArgumentError, "prefix must be numeric" if options[:prefix] && !(options[:prefix] =~ /^\d*$/)
+
     output = options[:prefix] || ''
-    (string_size-1).times do |n|
+    (string_size-output.size-1).times do |n|
       output += rand(10).to_s
     end
     output += '0'

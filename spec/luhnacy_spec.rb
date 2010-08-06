@@ -26,9 +26,14 @@ describe "Luhnacy" do
 
   it "should return a string that satisfies luhn and includes a given prefix" do
     prefix = '12345'
-    number_of_additional_digits = 10
-    candidate = Luhnacy.generate(number_of_additional_digits, :prefix => prefix)
-    candidate.should match /^#{prefix}\d{#{number_of_additional_digits}}$/
+    string_size = 15
+    candidate = Luhnacy.generate(string_size, :prefix => prefix)
+    candidate.should match /^#{prefix}\d{#{string_size - prefix.size}}$/
   end
 
+  it "should return an error if the prefix contains any non-numeric characters" do
+    prefix = 'AB123'
+    string_size = 15
+    lambda { Luhnacy.generate(string_size, :prefix => prefix) }.should raise_error ArgumentError
+  end
 end
