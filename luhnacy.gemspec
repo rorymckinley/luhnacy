@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{luhnacy}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rory McKinley"]
-  s.date = %q{2010-07-19}
+  s.date = %q{2010-08-07}
   s.description = %q{luhnacy can be used to validate strings for Luhn compliance as well as generating valid or invalid strings for the purposes of testing }
   s.email = %q{rorymckinley@gmail.com}
   s.extra_rdoc_files = [
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/luhnacy.rb",
+     "luhnacy.gemspec",
      "spec/luhnacy_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
