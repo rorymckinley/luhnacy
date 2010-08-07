@@ -36,4 +36,38 @@ describe "Luhnacy" do
     string_size = 15
     lambda { Luhnacy.generate(string_size, :prefix => prefix) }.should raise_error ArgumentError
   end
+
+  context "Named generators and validators" do
+    it "should validate a correct number" do
+      number = '5354334446769063'
+      Luhnacy.mastercard?(number).should be_true
+    end
+
+    it "should not validate a number if it does not satisfy Luhn" do
+      number = '5354334446769064'
+      Luhnacy.mastercard?(number).should be_false
+    end
+
+    it "should not validate a number if it does not have the correct prefix" do
+      number = Luhnacy.generate(16, :prefix => '49')
+      Luhnacy.mastercard?(number).should be_false
+    end
+
+    it "should not validate a number if it does not have the correct length" do
+      number = Luhnacy.generate(12, :prefix => '52')
+      Luhnacy.mastercard?(number).should be_false
+    end
+
+    it "should generate a valid number" do
+      Luhnacy.mastercard?(Luhnacy.mastercard).should be_true
+    end
+
+    it "should generate an invalid number" do
+      Luhnacy.mastercard?(Luhnacy.mastercard(:invalid => true)).should be_false
+    end
+
+    it "should raise an error if there is no matcher or validator with a given name" do
+      lambda { Luhnacy.superawesomecard?('123') }.should raise_error NoMethodError
+    end
+  end
 end

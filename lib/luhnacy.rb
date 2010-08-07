@@ -1,4 +1,9 @@
 class Luhnacy
+  @cards = {
+    :mastercard => { :prefixes => [ '51', '52', '53', '54', '55' ], :size => 16 },
+    :visa => { :prefixes => ['4'], :size => 16 },
+    :amex => { :prefixes => ['34','37'], :size => 15 }
+  }
   def self.valid?(candidate)
     calc_modulus(candidate) == 0
   end
@@ -30,6 +35,14 @@ class Luhnacy
     output
   end
 
+  def self.method_missing(type, *args)
+    card_type, method_type = parse_method_name(type)
+                                                  
+    raise NoMethodError unless @cards[card_type] && @cards[card_type][:prefixes] && @cards[card_type][:size]
+
+    send(method_type, *(args.unshift(card_type)))
+  end
+
   private
   def self.double_and_fix(number)
     2 * number > 9 ? ( (2 * number) % 10 + 1 ) : 2 * number
@@ -47,5 +60,30 @@ class Luhnacy
     end
 
     sum % 10
+  end
+
+  def self.parse_method_name(method_name) 
+    method_name = method_name.to_s
+    case method_name
+    when /(.*)\?$/
+      [ $~[1].to_sym, :valid_card? ]
+    else 
+      [ method_name.to_sym, :generate_card ]
+    end
+  end
+
+  def self.valid_card?(card_type, card_number)
+    valid?(card_number) && valid_pattern?(card_type, card_number)
+  end
+
+  def self.generate_card(card_type, options={})
+      generate(@cards[card_type][:size], options.merge({:prefix => @cards[card_type][:prefixes][rand(@cards[card_type][:prefixes].size)]}))
+  end
+
+  def self.valid_pattern?(card_type, card_number)
+    @cards[card_type][:prefixes].each do |prefix|
+      return true if card_number =~ /^#{prefix}\d{#{@cards[card_type][:size] - prefix.size}}$/
+    end
+    false
   end
 end
