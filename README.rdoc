@@ -8,6 +8,8 @@ To require:
 
   require 'luhnacy'
 
+=== Generic Validation\Generation
+
 To validate:
 
   Luhnacy.valid?('49927398716')
@@ -19,6 +21,40 @@ To generate a string of 10 digits that satisfies the Luhn algorithm:
 To generate a string of 10 digits that does not satisfy Luhn algorithm:
 
   invalid_string = Luhnacy.generate(10, :invalid => true)
+
+To generate a string of 10 digits that satisfies Luhn and starts with predefined characters:
+
+  Luhnacy.generate(10, :prefix => '12345') #=> "1234597480"
+
+=== Named Generators/Validators
+
+There are named validators and generators for Visa, Mastercard and American Express credit cards. Note: Visa validation/generation only works for 16-digit credit card numbers.
+
+Example usage (mastercard)
+
+To validate a mastercard:
+
+  Luhnacy.mastercard?("5176290135048779")
+
+To generate a mastercard number that satisfies Luhn:
+
+  Luhnacy.mastercard #=> "5151199732615386"
+
+To generate a master card number that does not satisfy Luhn:
+
+  Luhnacy.mastercard(:invalid => true)
+
+Similar usage exists for Visa and American Express:
+
+  Luhnacy.visa
+  Luhnacy.visa?
+
+  Luhnacy.amex
+  Luhnacy.amex?
+
+== Planned changes
+
+At some point it may make sense to store the patterns for the named generator in a seperate class/module or even in a YAML file. This will be driven by the need for additional named generators. If a YAML file is used, then the very next release may also include the ability to pass Luhnacy a custom YAML file for generating/validating strings.
 
 == Note on Patches/Pull Requests
  
@@ -35,6 +71,8 @@ To generate a string of 10 digits that does not satisfy Luhn algorithm:
 * http://blog.flame.org/2008/3/24/checking-credit-card-numbers-in-ruby
 * http://www.missiondata.com/blog/web-development/25/credit-card-type-and-luhn-check-in-ruby/
 * http://en.wikipedia.org/wiki/Luhn
+* http://www.darkcoding.net/credit-card-numbers/
+* http://en.wikipedia.org/wiki/Credit_card_number
 
 == Copyright
 
