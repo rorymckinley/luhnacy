@@ -2,7 +2,8 @@ class Luhnacy
   @cards = {
     :mastercard => { :prefixes => [ '51', '52', '53', '54', '55' ], :size => 16 },
     :visa => { :prefixes => ['4'], :size => 16 },
-    :amex => { :prefixes => ['34','37'], :size => 15 }
+    :amex => { :prefixes => ['34','37'], :size => 15 },
+    :doctor_npi => { :prefixes => ['80840'], :size => 15 }
   }
   def self.valid?(candidate)
     calc_modulus(candidate) == 0
