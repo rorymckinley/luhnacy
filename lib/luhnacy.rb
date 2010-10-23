@@ -1,5 +1,5 @@
 class Luhnacy
-  @cards = {
+  @named = {
     :mastercard => { :prefixes => [ '51', '52', '53', '54', '55' ], :size => 16 },
     :visa => { :prefixes => ['4'], :size => 16 },
     :amex => { :prefixes => ['34','37'], :size => 15 },
@@ -39,7 +39,7 @@ class Luhnacy
   def self.method_missing(type, *args)
     card_type, method_type = parse_method_name(type)
                                                   
-    raise NoMethodError unless @cards[card_type] && @cards[card_type][:prefixes] && @cards[card_type][:size]
+    raise NoMethodError unless @named[card_type] && @named[card_type][:prefixes] && @named[card_type][:size]
 
     send(method_type, *(args.unshift(card_type)))
   end
@@ -78,12 +78,12 @@ class Luhnacy
   end
 
   def self.generate_card(card_type, options={})
-      generate(@cards[card_type][:size], options.merge({:prefix => @cards[card_type][:prefixes][rand(@cards[card_type][:prefixes].size)]}))
+      generate(@named[card_type][:size], options.merge({:prefix => @named[card_type][:prefixes][rand(@named[card_type][:prefixes].size)]}))
   end
 
   def self.valid_pattern?(card_type, card_number)
-    @cards[card_type][:prefixes].each do |prefix|
-      return true if card_number =~ /^#{prefix}\d{#{@cards[card_type][:size] - prefix.size}}$/
+    @named[card_type][:prefixes].each do |prefix|
+      return true if card_number =~ /^#{prefix}\d{#{@named[card_type][:size] - prefix.size}}$/
     end
     false
   end
