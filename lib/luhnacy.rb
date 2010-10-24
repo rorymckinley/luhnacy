@@ -37,11 +37,11 @@ class Luhnacy
   end
 
   def self.method_missing(type, *args)
-    card_type, method_type = parse_method_name(type)
+    pattern_name, method_type = parse_method_name(type)
                                                   
-    raise NoMethodError unless @named[card_type] && @named[card_type][:prefixes] && @named[card_type][:size]
+    raise NoMethodError unless @named[pattern_name] && @named[pattern_name][:prefixes] && @named[pattern_name][:size]
 
-    send(method_type, *(args.unshift(card_type)))
+    send(method_type, *(args.unshift(pattern_name)))
   end
 
   private
@@ -67,23 +67,23 @@ class Luhnacy
     method_name = method_name.to_s
     case method_name
     when /(.*)\?$/
-      [ $~[1].to_sym, :valid_card? ]
+      [ $~[1].to_sym, :valid_pattern? ]
     else 
-      [ method_name.to_sym, :generate_card ]
+      [ method_name.to_sym, :generate_pattern ]
     end
   end
 
-  def self.valid_card?(card_type, card_number)
-    valid?(card_number) && valid_pattern?(card_type, card_number)
+  def self.valid_pattern?(pattern_name, pattern_candidate)
+    valid?(pattern_candidate) && valid_format?(pattern_name, pattern_candidate)
   end
 
-  def self.generate_card(card_type, options={})
-      generate(@named[card_type][:size], options.merge({:prefix => @named[card_type][:prefixes][rand(@named[card_type][:prefixes].size)]}))
+  def self.generate_pattern(pattern_name, options={})
+      generate(@named[pattern_name][:size], options.merge({:prefix => @named[pattern_name][:prefixes][rand(@named[pattern_name][:prefixes].size)]}))
   end
 
-  def self.valid_pattern?(card_type, card_number)
-    @named[card_type][:prefixes].each do |prefix|
-      return true if card_number =~ /^#{prefix}\d{#{@named[card_type][:size] - prefix.size}}$/
+  def self.valid_format?(pattern_name, pattern_candidate)
+    @named[pattern_name][:prefixes].each do |prefix|
+      return true if pattern_candidate =~ /^#{prefix}\d{#{@named[pattern_name][:size] - prefix.size}}$/
     end
     false
   end
