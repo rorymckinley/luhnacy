@@ -30,6 +30,8 @@ To generate a string of 10 digits that satisfies Luhn and starts with predefined
 
 There are named validators and generators for Visa, Mastercard and American Express credit cards. Note: Visa validation/generation only works for 16-digit credit card numbers.
 
+Also, there is also a named generator for the National Provider Identifier (thanks to Taylor Yelverton) used in the US to identify health care providers - see example usage section.
+
 Example usage (mastercard)
 
 To validate a mastercard:
@@ -44,13 +46,16 @@ To generate a master card number that does not satisfy Luhn:
 
   Luhnacy.mastercard(:invalid => true)
 
-Similar usage exists for Visa and American Express:
+Similar usage exists for Visa, American Express and NPI:
 
   Luhnacy.visa
   Luhnacy.visa?
 
   Luhnacy.amex
   Luhnacy.amex?
+
+  Luhnacy.doctor_npi
+  Luhnacy.doctor_npi?
 
 == Planned changes
 
