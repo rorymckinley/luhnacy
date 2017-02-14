@@ -1,42 +1,21 @@
-require 'rubygems'
-require 'rake'
+require 'bundler/setup'
+require 'bundler/gem_tasks'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "luhnacy"
-    gem.summary = %Q{A gem tohelp with the tedium of validating Luhn-compliant strings}
-    gem.description = %Q{luhnacy can be used to validate strings for Luhn compliance as well as generating valid or invalid strings for the purposes of testing }
-    gem.email = "rorymckinley@gmail.com"
-    gem.homepage = "http://github.com/rorymckinley/luhnacy"
-    gem.authors = ["Rory McKinley"]
-    gem.add_development_dependency "rspec", ">= 1.2.9"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec) do |spec|
 end
 
-require 'spec/rake/spectask'
-Spec::Rake::SpecTask.new(:spec) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.spec_files = FileList['spec/**/*_spec.rb']
-end
-
-Spec::Rake::SpecTask.new(:rcov) do |spec|
-  spec.libs << 'lib' << 'spec'
+RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.pattern = 'spec/**/*_spec.rb'
   spec.rcov = true
 end
 
-task :spec => :check_dependencies
-
 task :default => :spec
 
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+require 'rdoc/task'
+RDoc::Task.new do |rdoc|
+  version = File.read('VERSION')
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "luhnacy #{version}"
