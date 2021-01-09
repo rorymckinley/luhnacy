@@ -25,5 +25,6 @@ Gem::Specification.new do |s|
   s.summary = "A gem tohelp with the tedium of validating Luhn-compliant strings"
 
   s.add_development_dependency "rspec", ">= 2", "< 3"
-  s.add_development_dependency "rake", "< 11"
+  s.add_development_dependency "rake", "~> 13.0.3"
+  s.add_development_dependency "bundler-audit"
 end
